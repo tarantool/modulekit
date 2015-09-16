@@ -9,5 +9,5 @@ install:
   - sudo apt-get -q install tarantool tarantool-dev
 
 script:
-  - mkdir ./build && cd ./build && cmake .. -DCMAKE_BUILD_TYPE=RelWithDebugInfo; cd ..
+  - mkdir ./build && cd ./build && cmake .. -DCMAKE_BUILD_TYPE=RelWithDebugInfo && make
   - prove -v ./test/modulekit.test.lua
