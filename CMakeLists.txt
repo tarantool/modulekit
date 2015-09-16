@@ -25,5 +25,9 @@ set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} -Wall -Wextra")
 # Build module
 add_subdirectory(modulekit)
 
+# Add `make test`
+if(POLICY CMP0037)
+    cmake_policy(SET CMP0037 OLD) # don't blame `test` target name
+endif(POLICY CMP0037)
 add_custom_target(test
     COMMAND ${PROJECT_SOURCE_DIR}/test/modulekit.test.lua)
