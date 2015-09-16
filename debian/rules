@@ -1,0 +1,5 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+# CMake is only needed for Lua/C and C modules
+include /usr/share/cdbs/1/class/cmake.mk
