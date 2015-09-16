@@ -21,6 +21,12 @@ dependencies = {
     'lua >= 5.1';
 }
 
+external_dependencies = {
+    TARANTOOL = {
+        header = 'tarantool/tarantool.h'
+    };
+}
+
 build = {
     type = 'builtin',
 
@@ -28,6 +34,9 @@ build = {
         ['modulekit'] = 'modulekit/init.lua';
         ['modulekit.functions'] = 'modulekit/functions.lua';
         ['modulekit.cfunctions'] = {
+            incdirs = {
+                '$(TARANTOOL_INCDIR)/tarantool';
+            };
             sources = 'modulekit/cfunctions.c';
         }
     }
