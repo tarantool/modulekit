@@ -21,7 +21,9 @@
 
 3. Implement code in `./mymodule/`.
 
-4. Add tests to `./test/mymodule.test.lua`
+4. Add tests to `./test/mymodule.test.lua`:
+
+    prove -v ./test/modulekit.test.lua or ./test/modulekit.test.lua
 
 5. Update copyrights and README files.
 
