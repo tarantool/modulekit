@@ -8,14 +8,14 @@ macro(extract_definition name output input)
         ${output} "${_t}")
 endmacro()
 
-find_path(_dir tarantool.h
+find_path(_dir tarantool/module.h
   HINTS ENV TARANTOOL_DIR
-  PATH_SUFFIXES include/tarantool
+#  PATH_SUFFIXES include
 )
 
 if (_dir)
     set(_config "-")
-    file(READ "${_dir}/tarantool.h" _config0)
+    file(READ "${_dir}/tarantool/module.h" _config0)
     string(REPLACE "\\" "\\\\" _config ${_config0})
     unset(_config0)
     extract_definition(PACKAGE_VERSION TARANTOOL_VERSION ${_config})
@@ -36,7 +36,7 @@ if (TARANTOOL_FOUND AND NOT TARANTOOL_FIND_QUIETLY AND NOT FIND_TARANTOOL_DETAIL
     if (NOT CMAKE_INSTALL_PREFIX STREQUAL "/usr/local" AND
         NOT TARANTOOL_INSTALL_PREFIX STREQUAL CMAKE_INSTALL_PREFIX)
         message(WARNING "Provided CMAKE_INSTALL_PREFIX is different from "
-            "CMAKE_INSTALL_PREFIX in tarantool.h. You might need to set "
+            "CMAKE_INSTALL_PREFIX in module.h. You might need to set "
             "corrent package.path/package.cpath to load this module or "
             "change build prefix:"
             "\n"
@@ -47,4 +47,3 @@ if (TARANTOOL_FOUND AND NOT TARANTOOL_FIND_QUIETLY AND NOT FIND_TARANTOOL_DETAIL
     message(STATUS "Tarantool Module LUADIR is ${TARANTOOL_LUADIR}")
     message(STATUS "Tarantool Module LIBDIR is ${TARANTOOL_LIBDIR}")
 endif ()
-mark_as_advanced(TARANTOOL_INCLUDEDIR TARANTOOL_LUADIR TARANTOOL_LIBDIR TARANTOOL_VERSION)

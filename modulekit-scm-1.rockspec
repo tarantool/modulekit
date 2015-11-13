@@ -23,7 +23,7 @@ dependencies = {
 
 external_dependencies = {
     TARANTOOL = {
-        header = 'tarantool/tarantool.h'
+        header = 'tarantool/module.h'
     };
 }
 

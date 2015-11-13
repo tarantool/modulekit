@@ -1,5 +1,5 @@
 /* A C submodule */
-#include <tarantool.h>
+#include <tarantool/module.h>
 
 #include <lua.h>
 #include <lauxlib.h>
@@ -29,4 +29,4 @@ luaopen_modulekit_cfunctions(lua_State *L)
 	luaL_register(L, NULL, meta);
 	return 1;
 }
-/* vim: syntax=lua ts=8 sts=8 sw=8 noet */
+/* vim: syntax=c ts=8 sts=8 sw=8 noet */
