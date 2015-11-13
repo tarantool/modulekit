@@ -35,7 +35,7 @@ build = {
         ['modulekit.functions'] = 'modulekit/functions.lua';
         ['modulekit.cfunctions'] = {
             incdirs = {
-                '$(TARANTOOL_INCDIR)/tarantool';
+                '$(TARANTOOL_INCDIR)';
             };
             sources = 'modulekit/cfunctions.c';
         }
