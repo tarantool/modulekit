@@ -4,7 +4,7 @@ project(modulekit C)
 # project(modulekit C CXX) # uncomment for C++
 
 if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE RelWithDebugInfo)
+    set(CMAKE_BUILD_TYPE RelWithDebInfo)
 endif()
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}" ${CMAKE_MODULE_PATH})
 
