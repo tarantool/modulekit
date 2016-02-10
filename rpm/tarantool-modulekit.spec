@@ -7,6 +7,7 @@ License: BSD
 URL: https://github.com/tarantool/modulekit
 Source0: %{name}-%{version}.tar.gz
 BuildRequires: cmake
+BuildRequires: tarantool >= 1.6.8.0
 Vendor: tarantool.org
 %description
 A set of Lua, Lua/C and C module templates for Tarantool.
@@ -14,10 +15,10 @@ A set of Lua, Lua/C and C module templates for Tarantool.
 ##################################################################
 
 %prep
-%setup -c -q %{name}-%{version}
+%setup -q -n %{name}-%{version}
 
 %build
-%cmake . -DCMAKE_INSTALL_LIBDIR='%{_libdir}' -DCMAKE_INSTALL_INCLUDEDIR='%{_includedir}' -DCMAKE_BUILD_TYPE=RelWithDebugInfo
+%cmake . -DCMAKE_BUILD_TYPE=RelWithDebugInfo
 make %{?_smp_mflags}
 
 %install
