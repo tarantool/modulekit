@@ -17,4 +17,4 @@ Architecture: i386 amd64 armhf arm64
 Depends: tarantool (>= 1.6.8.0), ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Description: Templates for Tarantool modules
-    A set of Lua, Lua/C and C module templates for Tarantool.
+ A set of Lua, Lua/C and C module templates for Tarantool.
