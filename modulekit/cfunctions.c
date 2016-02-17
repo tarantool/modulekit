@@ -2,6 +2,7 @@
 #include <tarantool/module.h>
 
 #include <lua.h>
+#include <lualib.h>
 #include <lauxlib.h>
 
 static int
