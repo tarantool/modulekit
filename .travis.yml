@@ -20,7 +20,6 @@ env:
       - OS=debian DIST=jessie PACK=deb
       - OS=debian DIST=stretch PACK=deb
 #      - OS=debian DIST=sid PACK=deb
-      - PACK=none
 
 script:
   - git clone https://github.com/tarantool/build.git
