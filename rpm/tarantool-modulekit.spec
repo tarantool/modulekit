@@ -5,7 +5,7 @@ Summary: Templates for Tarantool modules
 Group: Applications/Databases
 License: BSD
 URL: https://github.com/tarantool/modulekit
-Source0: https://github.com/tarantool/%{name}/archive/%{version}/%{name}-%{version}.tar
+Source0: https://github.com/tarantool/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
 BuildRequires: cmake >= 2.8
 BuildRequires: gcc >= 4.5
 BuildRequires: tarantool-devel >= 1.6.8.0
@@ -19,7 +19,7 @@ This package provides a set of Lua, Lua/C and C module templates for Tarantool.
 %setup -q -n %{name}-%{version}
 
 %build
-%cmake . -DCMAKE_BUILD_TYPE=RelWithDebugInfo
+%cmake . -DCMAKE_BUILD_TYPE=RelWithDebInfo
 make %{?_smp_mflags}
 
 %check
