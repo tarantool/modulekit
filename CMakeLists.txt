@@ -30,6 +30,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
 # Build module
 add_subdirectory(modulekit)
 
-# Add `make check`
+# Add `make check
 add_custom_target(check
-    COMMAND ${PROJECT_SOURCE_DIR}/test/modulekit.test.lua)
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
+    COMMAND env - BINARY_DIR=${PROJECT_BINARY_DIR}
+            prove -v ./test/modulekit.test.lua)

@@ -1,7 +1,13 @@
 #!/usr/bin/env tarantool
 
-package.path = "../?.lua;../?/init.lua;./?.lua;./?/init.lua"
-package.cpath = "../?.so;../?.dylib;./?.so;./?.dylib"
+-- Fix tests in out of source build
+local dirs = { "..", ".",  os.getenv("BINARY_DIR") }
+package.path = ""
+package.cpath = ""
+for _, dir in pairs(dirs) do
+    package.path = package.path .. dir .. "/?/init.lua;" .. dir .. "/?.lua;"
+    package.cpath = package.cpath .. dir .. "/?.so;" .. dir .. "/?.dylib;"
+end
 
 local kit = require('modulekit')
 
