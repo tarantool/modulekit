@@ -31,7 +31,11 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
 add_subdirectory(modulekit)
 
 # Add `make check
+enable_testing()
+
+add_test(modulekit tarantool ${CMAKE_SOURCE_DIR}/test/modulekit.test.lua)
+
 add_custom_target(check
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     COMMAND env - BINARY_DIR=${PROJECT_BINARY_DIR}
-            prove -v ./test/modulekit.test.lua)
+            ctest)

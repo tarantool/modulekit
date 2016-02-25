@@ -21,3 +21,6 @@ install_manifest.txt
 ./build
 /build
 VERSION
+CTestTestfile.cmake
+Testing
+CTestTestfile.cmake

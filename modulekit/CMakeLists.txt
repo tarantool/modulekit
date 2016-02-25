@@ -1,3 +1,7 @@
+if (APPLE)
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -undefined suppress -flat_namespace")
+endif(APPLE)
+
 add_library(cfunctions SHARED cfunctions.c)
 target_link_libraries(cfunctions ${MSGPUCK_LIBRARIES})
 set_target_properties(cfunctions PROPERTIES PREFIX "" OUTPUT_NAME "cfunctions")
