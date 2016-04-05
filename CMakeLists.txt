@@ -30,12 +30,14 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wall -Wextra")
 # Build module
 add_subdirectory(modulekit)
 
-# Add `make check
 enable_testing()
 
-add_test(modulekit tarantool ${CMAKE_SOURCE_DIR}/test/modulekit.test.lua)
+set (LUA_PATH "LUA_PATH=${PROJECT_SOURCE_DIR}/?.lua\\;${PROJECT_SOURCE_DIR}/?/init.lua\\;;")
 
+add_test(modulekit ${CMAKE_SOURCE_DIR}/test/modulekit.test.lua)
+set_tests_properties(modulekit PROPERTIES ENVIRONMENT "${LUA_PATH}")
+
+# Add `make check`
 add_custom_target(check
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    COMMAND env - BINARY_DIR=${PROJECT_BINARY_DIR}
-            ctest)
+    WORKING_DIRECTORY ${PROJECT_BUILD_DIR}
+    COMMAND ctest -V)
