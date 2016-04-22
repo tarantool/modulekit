@@ -14,16 +14,20 @@
 
 2. Rename all files to use your favorite name:
 
+    ```bash
     grep -R modulekit .
     mv modulekit/ mymodule/
     mv test/modulekit.test.lua test/mymodule.test.lua
     ...
+    ```
 
 3. Implement code in `./mymodule/`.
 
 4. Add tests to `./test/mymodule.test.lua`:
 
+    ```bash
     prove -v ./test/modulekit.test.lua or ./test/modulekit.test.lua
+    ```
 
 5. Update copyrights and README files.
 
@@ -31,20 +35,26 @@
 
 7. Update and check `.rockspec`:
 
+    ```bash
     luarocks install --local modulekit-scm-1.rockspec
+    ```
 
 8. Push `.rockspec` and make a pull request with it `.rockspec` to
    https://github.com/tarantool/rocks repository.
 
 9. [Optional] Check DEB packaging and push `debian/` to GitHub:
 
+    ```bash
     dpkg-buildpackage -D -b -us -uc
     ls -l ../*.deb
+    ```
 
 10. [Optional] Check RPM packaging and push `rpm/` to GitHub.
 
+    ```bash
     tar cvzf ~/rpmbuild/SOURCES/tarantool-modulekit-1.0.0.tar.gz
     rpmbuild -b rpm/tarantool-modulekit.spec
+    ```
 
 [Tarantool.org][Download] build system build packages for all popular
 platforms automatically for you.
