@@ -1,18 +1,48 @@
-# modulekit - A set of [Tarantool][] module templates
+<a href="http://tarantool.org">
+	<img src="https://avatars2.githubusercontent.com/u/2344919?v=2&s=250" align="right">
+</a>
+<a href="https://travis-ci.org/tarantool/modulekit">
+	<img src="https://travis-ci.org/tarantool/modulekit.png?branch=master" align="right">
+</a>
 
-[![Build Status](https://travis-ci.org/tarantool/modulekit.png?branch=master)](https://travis-ci.org/tarantool/modulekit)
+# Module templates for Tarantool 1.6.5+
 
+Use these templates to create and publish a [Tarantool][] module written in Lua or C.
+
+## Table of contents
+* [Content](#content)
+* [Prerequisites](#prerequisites)
+* [Examples](#examples)
+* [See also](#see-also)
+
+## Content
+
+  * `./README.md` - this file
+  * `./modulekit/init.lua` - the Lua module itself, load with `require('modulekit')`
+  * `./modulekit/functions.lua` - Lua submodule
+  * `./modulekit/cfunctions.c` - Lua/C submodule
+  * `./test/modulekit.test.lua` - tests for the module
+  * `./modulekit-scm-1.rockspec` - a specification for [TarantoolRocks][]
+  * `./rpm/` - files to build an RPM package
+  * `./debian/` - files to build a DEB package
+  * `./CMakeLists.txt`, `./FindTarantool.cmake` - [CMake][] scripts
+    (only needed for C modules).
+    
 ## Prerequisites
 
- * Tarantool 1.6.5+ with header files (tarantool && tarantool-dev packages)
+Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
 
-## HOWTO
+## Usage
 
-1. Clone this repository
+1. Clone this repository.
 
-    git clone https://github.com/tarantool/modulekit.git
+   ```bash
+   git clone https://github.com/tarantool/modulekit.git
+   ```
 
-2. Rename all files to use your favorite name:
+2. Rename all files to use your favorite name.
+
+   For example, `mymodule`:
 
     ```bash
     grep -R modulekit .
@@ -21,7 +51,7 @@
     ...
     ```
 
-3. Implement code in `./mymodule/`.
+3. Implement your code in `./mymodule/`.
 
 4. Add tests to `./test/mymodule.test.lua`:
 
@@ -29,20 +59,23 @@
     prove -v ./test/modulekit.test.lua or ./test/modulekit.test.lua
     ```
 
-5. Update copyrights and README files.
+5. Update copyright and README files.
 
-6. Push all files except `rpm/`, `debian/`, `mymodule-scm-1.rockspec`.
+6. Push all files except `rpm/`, `debian/` and `mymodule-scm-1.rockspec`.
 
-7. Update and check `.rockspec`:
+7. Update and check `.rockspec`.
+
+   Your `.rockspec` file must comply with [these requirements][Requirements]
+   and allow to successfully install your module locally:
 
     ```bash
     luarocks install --local modulekit-scm-1.rockspec
     ```
 
-8. Push `.rockspec` and make a pull request with it `.rockspec` to
-   https://github.com/tarantool/rocks repository.
+8. Push your `.rockspec` and make a pull request to
+   http://github.com/tarantool/rocks repository.
 
-9. [Optional] Check DEB packaging and push `debian/` to GitHub:
+9. [Optional] Check DEB packaging and push `debian/` to GitHub.
 
     ```bash
     dpkg-buildpackage -D -b -us -uc
@@ -52,38 +85,21 @@
 10. [Optional] Check RPM packaging and push `rpm/` to GitHub.
 
     ```bash
-    tar cvzf ~/rpmbuild/SOURCES/tarantool-modulekit-1.0.0.tar.gz
-    rpmbuild -b rpm/tarantool-modulekit.spec
+    tar cvzf ~/rpmbuild/SOURCES/tarantool-mymodule-1.0.0.tar.gz
+    rpmbuild -b rpm/tarantool-mymodule.spec
     ```
 
-[Tarantool.org][Download] build system build packages for all popular
-platforms automatically for you.
+Enjoy! Thank you for contributing to Tarantool.
 
-Enjoy!
-Thank your for contributing Tarantool!
+## Examples
 
-## Content of the ModuleKit
-
-  * `./README.md` - this file
-  * `./modulekit/init.lua` - the Lua module itself, load with require('modulekit')
-  * `./modulekit/functions.lua` - Lua submodule
-  * `./modulekit/cfunctions.c` - Lua/C submodule
-  * `./test/modulekit.test.lua` - tests for the module
-  * `./modulekit-scm-1.rockspec` a specification for [TarantoolRocks][]
-  * `./rpm/` - files to build RPM package
-  * `./debian/` - files to build DEB package
-  * `./CMakeLists.txt`, `./FindTarantool.cmake` - [CMake][] scripts
-    (only needed for C and Lua/C modules).
-
-## More Examples
-
- * [A pure Lua module example](https://github.com/tarantool/queue)
- * [One more pure Lua module example](https://github.com/tarantool/gperftools)
- * [Lua/C module example](https://github.com/tarantool/pg)
- * [One more Lua/C module example](https://github.com/tarantool/http)
+ * [Lua module example](http://github.com/tarantool/queue)
+ * [One more Lua module example](http://github.com/tarantool/gperftools)
+ * [C module example](http://github.com/tarantool/pg)
+ * [One more C module example](http://github.com/tarantool/http)
 
 
-## See Also
+## See also
 
  * [Tarantool][]
  * [Tarantool Rocks][TarantoolRocks]
@@ -93,8 +109,9 @@ Thank your for contributing Tarantool!
 
 [Tarantool]: http://github.com/tarantool/tarantool
 [Download]: http://tarantool.org/download.html
-[RockSpec]: https://github.com/keplerproject/luarocks/wiki/Rockspec-format
+[Requirements]: http://github.com/tarantool/rocks#contributing
+[RockSpec]: http://github.com/keplerproject/luarocks/wiki/Rockspec-format
 [LuaCReference]: http://pgl.yoyo.org/luai/i/_
 [TarantoolLuaReference]: http://tarantool.org/doc/reference/index.html
 [TarantoolCReference]: http://tarantool.org/doc/reference/capi.html
-[TarantoolRocks]: https://github.com/tarantool/rocks
+[TarantoolRocks]: http://github.com/tarantool/rocks

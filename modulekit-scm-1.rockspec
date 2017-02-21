@@ -9,7 +9,7 @@ source  = {
 description = {
     summary  = "A set of Tarantool module templates";
     detailed = [[
-    A ready to use module templates. Clone and modify to create
+    Ready-to-use module templates. Clone and modify to create
     new modules.
     ]];
     homepage = 'https://github.com/tarantool/modulekit.git';
@@ -18,7 +18,7 @@ description = {
 }
 
 dependencies = {
-    'lua >= 5.1';
+    'lua == 5.1';
 }
 
 external_dependencies = {
