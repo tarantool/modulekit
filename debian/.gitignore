@@ -1,4 +1,4 @@
-tarantool-modulekit/
+tarantool-luakit/
 files
 stamp-*
 *.substvars

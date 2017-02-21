@@ -8,12 +8,6 @@
 
 local log = require('log') -- some Tarantool module
 
--- Lua submodule
-local functions = require('modulekit.functions')
--- Lua/C submodule
-local cfunctions = require('modulekit.cfunctions')
--- Now you can use functions.* and cfunctions.* in your code
-
 --
 -- Constants
 --
@@ -27,6 +21,9 @@ local SOME_CONSTANT = 10
 
 -- A some module function
 local function test(x)
+    if x == nil then
+        error("Usage: test(x: integer)")
+    end
     log.info("test() called with x=%s", x)
     return x + SOME_CONSTANT
 end
@@ -35,10 +32,8 @@ end
 -- Export functions
 --
 
-    -- result is returned from require('example')
+-- returned a result from require('luakit')
 return {
     test = test;
-    functions = functions;
-    cfunctions = cfunctions;
 }
 -- vim: ts=4 sts=4 sw=4 et
