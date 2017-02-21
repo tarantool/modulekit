@@ -9,7 +9,7 @@ Vcs-Git: git://github.com/tarantool/luakit.git
 Vcs-Browser: https://github.com/tarantool/luakit
 
 Package: tarantool-luakit
-Architecture: i386 amd64 armhf arm64
+Architecture: all
 Depends: tarantool (>= 1.6.8.0), ${shlibs:Depends}, ${misc:Depends}
 Pre-Depends: ${misc:Pre-Depends}
 Description: Lua module template for Tarantool

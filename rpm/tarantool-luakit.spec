@@ -7,6 +7,7 @@ Group: Applications/Databases
 License: BSD
 URL: https://github.com/tarantool/%{modname}
 Source0: https://github.com/tarantool/%{modname}/archive/%{version}/%{modname}-%{version}.tar.gz
+BuildArch: noarch
 BuildRequires: tarantool-devel >= 1.6.8.0
 Requires: tarantool >= 1.6.8.0
 
