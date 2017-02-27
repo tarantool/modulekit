@@ -1,4 +1,4 @@
-tarantool-luakit (2.0.0-1) unstable; urgency=medium
+tarantool-ckit (2.0.0-1) unstable; urgency=medium
 
   * Split into luakit and ckit
 
