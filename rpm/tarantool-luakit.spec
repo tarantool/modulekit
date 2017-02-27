@@ -1,12 +1,11 @@
-%define modname luakit
-Name: tarantool-%{modname}
+Name: tarantool-luakit
 Version: 2.0.0
 Release: 1%{?dist}
 Summary: Lua module template for Tarantool
 Group: Applications/Databases
 License: BSD
-URL: https://github.com/tarantool/%{modname}
-Source0: https://github.com/tarantool/%{modname}/archive/%{version}/%{modname}-%{version}.tar.gz
+URL: https://github.com/tarantool/modulekit
+Source0: luakit-%{version}.tar.gz
 BuildArch: noarch
 BuildRequires: tarantool-devel >= 1.6.8.0
 Requires: tarantool >= 1.6.8.0
@@ -15,20 +14,20 @@ Requires: tarantool >= 1.6.8.0
 This package provides a Lua module template for Tarantool.
 
 %prep
-%setup -q -n %{modname}-%{version}
+%setup -q -n luakit-%{version}
 
 %check
 ./test/luakit.test.lua
 
 %install
-# Create /usr/share/tarantool/%{modname}
-mkdir -p %{buildroot}%{_datadir}/tarantool/%{modname}
-# Copy init.lua to /usr/share/tarantool/%{modname}/init.lua
-cp -p %{modname}/*.lua %{buildroot}%{_datadir}/tarantool/%{modname}
+# Create /usr/share/tarantool/luakit
+mkdir -p %{buildroot}%{_datadir}/tarantool/luakit
+# Copy init.lua to /usr/share/tarantool/luakit/init.lua
+cp -p luakit/*.lua %{buildroot}%{_datadir}/tarantool/luakit
 
 %files
-%dir %{_datadir}/tarantool/%{modname}
-%{_datadir}/tarantool/%{modname}/
+%dir %{_datadir}/tarantool/luakit
+%{_datadir}/tarantool/luakit/
 %doc README.md
 %{!?_licensedir:%global license %doc}
 %license LICENSE AUTHORS
