@@ -1,11 +1,11 @@
-Name: tarantool-modulekit
-Version: 1.0.1
+Name: tarantool-ckit
+Version: 2.0.0
 Release: 1%{?dist}
-Summary: Templates for Tarantool modules
+Summary: C module template for Tarantool
 Group: Applications/Databases
 License: BSD
 URL: https://github.com/tarantool/modulekit
-Source0: https://github.com/tarantool/%{name}/archive/%{version}/%{name}-%{version}.tar.gz
+Source0: ckit-%{version}.tar.gz
 BuildRequires: cmake >= 2.8
 BuildRequires: gcc >= 4.5
 BuildRequires: tarantool-devel >= 1.6.8.0
@@ -14,7 +14,7 @@ BuildRequires: /usr/bin/prove
 Requires: tarantool >= 1.6.8.0
 
 %description
-This package provides a set of Lua, Lua/C and C module templates for Tarantool.
+This package provides C module template for Tarantool.
 
 %prep
 %setup -q -n %{name}-%{version}
@@ -37,6 +37,9 @@ make %{?_smp_mflags} check
 %license LICENSE AUTHORS
 
 %changelog
+* Mon Feb 27 2017 Roman Tsisyk <roman@tarantool.org> 2.0.0-1
+- Split package into luakit and ckit.
+
 * Wed Feb 17 2016 Roman Tsisyk <roman@tarantool.org> 1.0.1-1
 - Fix to comply Fedora Package Guidelines
 

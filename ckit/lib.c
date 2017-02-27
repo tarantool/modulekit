@@ -6,7 +6,7 @@
 #include <lauxlib.h>
 
 static int
-modulekit_func(struct lua_State *L)
+ckit_func(struct lua_State *L)
 {
 	if (lua_gettop(L) < 2)
 		luaL_error(L, "Usage: cfunctions.func(a: number, b: number)");
@@ -19,12 +19,12 @@ modulekit_func(struct lua_State *L)
 }
 
 LUA_API int
-luaopen_modulekit_cfunctions(lua_State *L)
+luaopen_ckit_lib(lua_State *L)
 {
-	/* result is returned from require('modulekit.cfunctions') */
+	/* result is returned from require('ckit.lib') */
 	lua_newtable(L);
 	static const struct luaL_reg meta [] = {
-		{"func", modulekit_func},
+		{"func", ckit_func},
 		{NULL, NULL}
 	};
 	luaL_register(L, NULL, meta);

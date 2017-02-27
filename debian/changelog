@@ -1,3 +1,9 @@
+tarantool-luakit (2.0.0-1) unstable; urgency=medium
+
+  * Split into luakit and ckit
+
+ -- Roman Tsisyk <roman@tarantool.org> Mon, 27 Feb 2017 18:12:00 +0300
+
 tarantool-modulekit (1.0.1-1) unstable; urgency=medium
 
   * Fix tarantool-dev and libmsgpuck-dev dependencies
