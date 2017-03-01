@@ -1,16 +1,16 @@
 <a href="http://tarantool.org">
 	<img src="https://avatars2.githubusercontent.com/u/2344919?v=2&s=250" align="right">
 </a>
-<a href="https://travis-ci.org/tarantool/ckit">
-	<img src="https://travis-ci.org/tarantool/ckit.png?branch=ckit" align="right">
+<a href="https://travis-ci.org/tarantool/modulekit">
+	<img src="https://travis-ci.org/tarantool/modulekit.png?branch=ckit" align="right">
 </a>
 
 # C module template for Tarantool 1.6+
 
-Use these templates to create and publish a [Tarantool][] module written in C.
+Use this template to create and publish a [Tarantool][] module written in C.
 
-**Note:** If you write a Tarantool module in pure Lua, see the [luakit][Luakit]
-branch of this repository.
+**Note:** If you write a Tarantool module in pure Lua only, see the
+[luakit][Luakit] branch of this repository.
 
 ## Table of contents
 * [Kit content](#kit-content)
@@ -33,7 +33,8 @@ branch of this repository.
     
 ## Prerequisites
 
-Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
+Tarantool 1.6.5+ with header files (`tarantool`, `tarantool-dev` and
+`libmsgpuck-dev` packages)
 
 ## Usage
 
@@ -58,20 +59,25 @@ Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
 
 3. Implement your code in `./mymodule/`.
 
-   You will have one or more *C submodules* and a *Lua module* that will be
-   exporting C functions for Lua API calls. 
+   You will have one or more *C submodules*, which export their functions for
+   API calls. Also, you may have *Lua modules*, which in their turn may
+   re-export the C submodules' functions for API calls.
    
-   See examples:
-   * [ckit/lib.c][CModule] - a C submodule. It contains one internal function,
-     `ckit_func()`, and exports another function, `luaopen_ckit_lib()`, which
-     uses `ckit_func()`. 
-   * [ckit/init.lua][LuaCModule] - a Lua module. It loads the C submodule with
-     `require('ckit.lib')` and then re-exports it as `cfunc` function for Lua
-     API calls.
+   As an example, see the following modules from the `ckit` package:
+   * [ckit/lib.c][CModule] - a C submodule. Here we have one internal function
+     (`ckit_func()`) and export another function (`luaopen_ckit_lib()`) which
+     uses `ckit_func()`.
+   * [ckit/init.lua][LuaCModule] - a Lua module. Here we load the C submodule
+     with `require('ckit.lib')` and then re-export it as `cfunc` function for
+     API calls. Also, we have a Lua function (`func()`) that uses the
+     exported C function from `ckit.lib`, and we export this Lua function as
+     `func` function.
      
-   As a result, when you publish `mymodule` package (see step 7), Tarantool
-   users will be able to load and call the C function `luaopen_ckit_lib()` with
-   `require('mymodule.cfunc(args)')`.
+   As a result, after we publish the `ckit` package in step 7, Tarantool
+   users will be able to load the package and call two functions:
+   * the C function `luaopen_ckit_lib()` - with `require('ckit.lib').func(args)`
+     or `require('ckit').cfunc(args)`, and
+   * the Lua function `func()` - with `require('ckit').func(args)`.
 
 4. Add tests to `./test/mymodule.test.lua`:
 
@@ -90,7 +96,7 @@ Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
    [format][RockSpecFormat] and [creation][RockSpecCreation].
    
    Your rockspec must comply with [these requirements][Requirements]
-   and allow to install your module locally:
+   and allow to build and install your package locally:
 
     ```bash
     luarocks install --local mymodule-scm-1.rockspec
@@ -101,9 +107,10 @@ Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
 8. Push your rockspec and make a pull request to the
    [tarantool/rocks][TarantoolRocks] repository.
    
-   The Tarantool team will review your request and decide on including it in
-   [Tarantool rocks list][TarantoolRocksList] and 
+   The Tarantool team will review the request and decide on including your
+   package in [Tarantool rocks list][TarantoolRocksList] and 
    [official Tarantool images for Docker][TarantoolDocker].
+
 
 9. [Optional] Check DEB packaging and push `debian/` to GitHub.
 
@@ -131,7 +138,6 @@ Enjoy! Thank you for contributing to Tarantool.
  * [Tarantool/C API Reference][TarantoolCReference]
  * [Lua/C API Reference][LuaCReference]
  * Basics of [creating][CreateLuaModule] a Lua module for Tarantool
-
 
 [Tarantool]: http://github.com/tarantool/tarantool
 [Download]: http://tarantool.org/download.html
