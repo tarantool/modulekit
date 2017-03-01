@@ -1,32 +1,35 @@
 <a href="http://tarantool.org">
 	<img src="https://avatars2.githubusercontent.com/u/2344919?v=2&s=250" align="right">
 </a>
-<a href="https://travis-ci.org/tarantool/modulekit">
-	<img src="https://travis-ci.org/tarantool/modulekit.png?branch=master" align="right">
+<a href="https://travis-ci.org/tarantool/ckit">
+	<img src="https://travis-ci.org/tarantool/ckit.png?branch=ckit" align="right">
 </a>
 
-# Module templates for Tarantool 1.6.5+
+# C module template for Tarantool 1.6+
 
-Use these templates to create and publish a [Tarantool][] module written in Lua or C.
+Use these templates to create and publish a [Tarantool][] module written in C.
+
+**Note:** If you write a Tarantool module in pure Lua, see the [luakit][Luakit]
+branch of this repository.
 
 ## Table of contents
-* [Content](#content)
+* [Kit content](#kit-content)
 * [Prerequisites](#prerequisites)
 * [Examples](#examples)
 * [See also](#see-also)
 
-## Content
+## Kit content
 
   * `./README.md` - this file
-  * `./modulekit/init.lua` - the Lua module itself, load with `require('modulekit')`
-  * `./modulekit/functions.lua` - Lua submodule
-  * `./modulekit/cfunctions.c` - Lua/C submodule
-  * `./test/modulekit.test.lua` - tests for the module
-  * `./modulekit-scm-1.rockspec` - a specification for [TarantoolRocks][]
+  * `./ckit/init.lua` - the Lua module itself, loaded with `require('ckit')`
+  * `./ckit/lib.c` - C submodule
+  * `./test/ckit.test.lua` - tests for the module
+  * `./ckit-scm-1.rockspec` - a specification for the
+    [tarantool/rocks][TarantoolRocks] repository
   * `./rpm/` - files to build an RPM package
   * `./debian/` - files to build a DEB package
-  * `./CMakeLists.txt`, `./FindTarantool.cmake` - [CMake][] scripts
-    (only needed for C modules).
+  * `./CMakeLists.txt`, `./FindTarantool.cmake` - CMake scripts
+    (only needed for C modules)
     
 ## Prerequisites
 
@@ -34,10 +37,12 @@ Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
 
 ## Usage
 
-1. Clone this repository.
+1. Clone this repository and switch to the `ckit` branch.
 
    ```bash
    git clone https://github.com/tarantool/modulekit.git
+   git fetch origin
+   git checkout -b ckit origin/ckit
    ```
 
 2. Rename all files to use your favorite name.
@@ -45,35 +50,60 @@ Tarantool 1.6.5+ with header files (`tarantool` and `tarantool-dev` packages)
    For example, `mymodule`:
 
     ```bash
-    grep -R modulekit .
-    mv modulekit/ mymodule/
-    mv test/modulekit.test.lua test/mymodule.test.lua
+    grep -R ckit .
+    mv ckit/ mymodule/
+    mv test/ckit.test.lua test/mymodule.test.lua
     ...
     ```
 
 3. Implement your code in `./mymodule/`.
 
+   You will have one or more *C submodules* and a *Lua module* that will be
+   exporting C functions for Lua API calls. 
+   
+   See examples:
+   * [ckit/lib.c][CModule] - a C submodule. It contains one internal function,
+     `ckit_func()`, and exports another function, `luaopen_ckit_lib()`, which
+     uses `ckit_func()`. 
+   * [ckit/init.lua][LuaCModule] - a Lua module. It loads the C submodule with
+     `require('ckit.lib')` and then re-exports it as `cfunc` function for Lua
+     API calls.
+     
+   As a result, when you publish `mymodule` package (see step 7), Tarantool
+   users will be able to load and call the C function `luaopen_ckit_lib()` with
+   `require('mymodule.cfunc(args)')`.
+
 4. Add tests to `./test/mymodule.test.lua`:
 
     ```bash
-    prove -v ./test/modulekit.test.lua or ./test/modulekit.test.lua
+    prove -v ./test/ckit.test.lua or ./test/ckit.test.lua
     ```
 
 5. Update copyright and README files.
 
 6. Push all files except `rpm/`, `debian/` and `mymodule-scm-1.rockspec`.
 
-7. Update and check `.rockspec`.
-
-   Your `.rockspec` file must comply with [these requirements][Requirements]
-   and allow to successfully install your module locally:
+7. Update and check the rockspec.
+    
+   A `.rockspec` file wraps a module into a package. This is what you can
+   publish. If you are new to Lua rocks, see general information on rockspec 
+   [format][RockSpecFormat] and [creation][RockSpecCreation].
+   
+   Your rockspec must comply with [these requirements][Requirements]
+   and allow to install your module locally:
 
     ```bash
-    luarocks install --local modulekit-scm-1.rockspec
+    luarocks install --local mymodule-scm-1.rockspec
     ```
+    
+    See an annotated rockspec example in [ckit-scm-1.rockspec][CRockSpec].
 
-8. Push your `.rockspec` and make a pull request to
-   http://github.com/tarantool/rocks repository.
+8. Push your rockspec and make a pull request to the
+   [tarantool/rocks][TarantoolRocks] repository.
+   
+   The Tarantool team will review your request and decide on including it in
+   [Tarantool rocks list][TarantoolRocksList] and 
+   [official Tarantool images for Docker][TarantoolDocker].
 
 9. [Optional] Check DEB packaging and push `debian/` to GitHub.
 
@@ -93,25 +123,32 @@ Enjoy! Thank you for contributing to Tarantool.
 
 ## Examples
 
- * [Lua module example](http://github.com/tarantool/queue)
- * [One more Lua module example](http://github.com/tarantool/gperftools)
  * [C module example](http://github.com/tarantool/pg)
  * [One more C module example](http://github.com/tarantool/http)
 
-
 ## See also
 
- * [Tarantool][]
- * [Tarantool Rocks][TarantoolRocks]
- * [Tarantool/Lua API Reference][TarantoolLuaReference]
  * [Tarantool/C API Reference][TarantoolCReference]
  * [Lua/C API Reference][LuaCReference]
+ * Basics of [creating][CreateLuaModule] a Lua module for Tarantool
+
 
 [Tarantool]: http://github.com/tarantool/tarantool
 [Download]: http://tarantool.org/download.html
 [Requirements]: http://github.com/tarantool/rocks#contributing
-[RockSpec]: http://github.com/keplerproject/luarocks/wiki/Rockspec-format
+[RockSpecFormat]: http://github.com/keplerproject/luarocks/wiki/Rockspec-format
+[RockSpecCreation]: http://github.com/luarocks/luarocks/wiki/Creating-a-rock
 [LuaCReference]: http://pgl.yoyo.org/luai/i/_
 [TarantoolLuaReference]: http://tarantool.org/doc/reference/index.html
 [TarantoolCReference]: http://tarantool.org/doc/reference/capi.html
 [TarantoolRocks]: http://github.com/tarantool/rocks
+[TarantoolRocksList]: http://tarantool.org/rocks.html
+[TarantoolDocker]: http://github.com/tarantool/docker
+[Luakit]: http://github.com/tarantool/modulekit/tree/luakit
+[Ckit]: http://github.com/tarantool/modulekit/tree/ckit
+[LuaModule]: http://github.com/tarantool/modulekit/blob/luakit/luakit/init.lua
+[CModule]: http://github.com/tarantool/modulekit/blob/ckit/ckit/lib.c
+[LuaCModule]: http://github.com/tarantool/modulekit/blob/ckit/ckit/init.lua
+[LuaRockSpec]: http://github.com/tarantool/modulekit/blob/luakit/luakit-scm-1.rockspec
+[CRockSpec]: http://github.com/tarantool/modulekit/blob/ckit/ckit-scm-1.rockspec
+[CreateLuaModule]: http://tarantool.org/en/doc/book/app_server/creating_app.html#modules-rocks-and-applications

@@ -1,41 +1,41 @@
 --------------------------------------------------------------------------------
---- An example of Lua module for Tarantool
+--- Example of a Lua module for Tarantool
 --------------------------------------------------------------------------------
 
 --
 -- Dependencies
 --
 
-local log = require('log') -- some Tarantool module
+local log = require('log') -- some other Tarantool module
 
 -- C library
 local clib = require('ckit.lib')
--- Now you can use functions.* and cfunctions.* in your code
+-- Now you can use exported C functions from 'ckit/lib.c' submodule in your code
 
 --
 -- Constants
 --
 
--- local variables are only visible from this file.
+-- local variables are only visible from this file
 local SOME_CONSTANT = 10
 
 --
--- Functions
+-- Internal functions
 --
 
--- A some module function
+-- Some internal function
 local function func(a, b)
     log.info("func() called with a=%s b=%s", a, b)
     return a + b
 end
 
 --
--- Export functions
+-- Exported functions
 --
 
--- result is returned from require('example')
+-- result returned from require('ckit')
 return {
-    func = func; -- Lua function
-    cfunc = clib.func; -- Lua/C function
+    func = func; -- pure Lua function
+    cfunc = clib.func; -- C function
 }
 -- vim: ts=4 sts=4 sw=4 et
