@@ -1,8 +1,8 @@
 <a href="http://tarantool.org">
 	<img src="https://avatars2.githubusercontent.com/u/2344919?v=2&s=250" align="right">
 </a>
-<a href="https://travis-ci.org/tarantool/luakit">
-	<img src="https://travis-ci.org/tarantool/luakit.png?branch=luakit" align="right">
+<a href="https://travis-ci.org/tarantool/modulekit">
+	<img src="https://travis-ci.org/tarantool/modulekit.png?branch=luakit" align="right">
 </a>
 
 # Lua module template for Tarantool 1.6+
