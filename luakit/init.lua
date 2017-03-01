@@ -1,25 +1,25 @@
 --------------------------------------------------------------------------------
---- An example of Lua module for Tarantool
+--- Example of a Lua module for Tarantool
 --------------------------------------------------------------------------------
 
 --
 -- Dependencies
 --
 
-local log = require('log') -- some Tarantool module
+local log = require('log') -- some other Tarantool module
 
 --
 -- Constants
 --
 
--- local variables are only visible from this file.
+-- local variables are only visible from this file
 local SOME_CONSTANT = 10
 
 --
--- Functions
+-- Internal functions
 --
 
--- A some module function
+-- Some internal function
 local function test(x)
     if x == nil then
         error("Usage: test(x: integer)")
@@ -29,10 +29,10 @@ local function test(x)
 end
 
 --
--- Export functions
+-- Exported functions
 --
 
--- returned a result from require('luakit')
+-- result returned from require('luakit')
 return {
     test = test;
 }
