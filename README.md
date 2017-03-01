@@ -137,7 +137,7 @@ Enjoy! Thank you for contributing to Tarantool.
 
  * [Tarantool/C API Reference][TarantoolCReference]
  * [Lua/C API Reference][LuaCReference]
- * Basics of [creating][CreateLuaModule] a Lua module for Tarantool
+ * [Basics of creating a Lua module for Tarantool][CreateLuaModule]
 
 [Tarantool]: http://github.com/tarantool/tarantool
 [Download]: http://tarantool.org/download.html
