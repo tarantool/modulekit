@@ -2,7 +2,7 @@
 	<img src="https://avatars2.githubusercontent.com/u/2344919?v=2&s=250" align="right">
 </a>
 <a href="https://travis-ci.org/tarantool/luakit">
-	<img src="https://travis-ci.org/tarantool/luakit.png?branch=master" align="right">
+	<img src="https://travis-ci.org/tarantool/luakit.png?branch=luakit" align="right">
 </a>
 
 # Lua module template for Tarantool 1.6+
@@ -57,16 +57,18 @@ Tarantool 1.6.8+ with header files (`tarantool` and `tarantool-dev` packages)
 
 3. Implement your code in `./mymodule/`.
 
-   You will have a Lua module that exports its functions for Lua API calls.
+   You will have one or more Lua modules that export their functions for
+   API calls.
 
-   See [luakit/init.lua][LuaModule] for an example of a Lua module that contains
-   one internal function, `test()`, and exports it as `test` for API calls.
+   As an example, see the Lua module [luakit/init.lua][LuaModule] from the
+   `luakit` package. Here we have one internal function (`test()`), and we
+   export it as `test` for API calls.
    
-   As a result, when you publish `mymodule` package (see step 7), Tarantool
-   users will be able to load and call the function `test()` with
-   `require('mymodule.test(arg)')`.
+   As a result, after we publish the `luakit` package in step 7, Tarantool
+   users will be able to load the package and call the function `test()` with
+   `require('luakit').test(arg)`.
    
-   **Note:** The basics of [creating][CreateLuaModule] a Lua module for
+   **Note:** The basics of [creating a Lua module][CreateLuaModule] for
    Tarantool are explained in the Tarantool manual.
 
 4. Add tests to `./test/mymodule.test.lua`:
@@ -86,7 +88,7 @@ Tarantool 1.6.8+ with header files (`tarantool` and `tarantool-dev` packages)
    [format][RockSpecFormat] and [creation][RockSpecCreation].
    
    Your rockspec must comply with [these requirements][Requirements]
-   and allow to install your module locally:
+   and allow to build and install your package locally:
 
     ```bash
     luarocks install --local mymodule-scm-1.rockspec
@@ -97,8 +99,8 @@ Tarantool 1.6.8+ with header files (`tarantool` and `tarantool-dev` packages)
 8. Push your rockspec and make a pull request to the
    [tarantool/rocks][TarantoolRocks] repository.
    
-   The Tarantool team will review your request and decide on including it in
-   [Tarantool rocks list][TarantoolRocksList] and 
+   The Tarantool team will review the request and decide on including your
+   package in [Tarantool rocks list][TarantoolRocksList] and 
    [official Tarantool images for Docker][TarantoolDocker].
 
 9. [Optional] Check DEB packaging and push `debian/` to GitHub.
