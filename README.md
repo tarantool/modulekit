@@ -22,7 +22,7 @@ Use this template to create and publish a [Tarantool][] module written in C.
 
   * `./README.md` - this file
   * `./ckit/init.lua` - the Lua module itself, loaded with `require('ckit')`
-  * `./ckit/lib.c` - C submodule
+  * `./ckit/lib.c` - C module
   * `./test/ckit.test.lua` - tests for the module
   * `./ckit-scm-1.rockspec` - a specification for the
     [tarantool/rocks][TarantoolRocks] repository
@@ -59,15 +59,15 @@ Tarantool 1.6.5+ with header files (`tarantool`, `tarantool-dev` and
 
 3. Implement your code in `./mymodule/`.
 
-   You will have one or more *C submodules*, which export their functions for
+   You will have one or more *C modules*, which export their functions for
    API calls. Also, you may have *Lua modules*, which in their turn may
-   re-export the C submodules' functions for API calls.
+   re-export the C modules' functions for API calls.
    
    As an example, see the following modules from the `ckit` package:
-   * [ckit/lib.c][CModule] - a C submodule. Here we have one internal function
+   * [ckit/lib.c][CModule] - a C module. Here we have one internal function
      (`ckit_func()`) and export another function (`luaopen_ckit_lib()`) which
      uses `ckit_func()`.
-   * [ckit/init.lua][LuaCModule] - a Lua module. Here we load the C submodule
+   * [ckit/init.lua][LuaCModule] - a Lua module. Here we load the C module
      with `require('ckit.lib')` and then re-export it as `cfunc` function for
      API calls. Also, we have a Lua function (`func()`) that uses the
      exported C function from `ckit.lib`, and we export this Lua function as
