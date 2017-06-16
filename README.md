@@ -22,7 +22,7 @@ this repository.
 ## Kit content
 
   * `./README.md` - this file
-  * `./luakit/init.lua` - the Lua module itself, loaded with `require('luakit')`
+  * `./luakit/init.lua` - the Lua module itself, loaded with `require('modulekit')`
   * `./luakit-scm-1.rockspec` - a specification for the
     [tarantool/rocks][TarantoolRocks] repository
   * `./test/modulekit.test.lua` - tests for the module
