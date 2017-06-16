@@ -38,7 +38,7 @@ Tarantool 1.6.8+ with header files (`tarantool` and `tarantool-dev` packages)
 1. Clone this repository.
 
    ```bash
-   git clone https://github.com/tarantool/luakit.git
+   git clone https://github.com/tarantool/modulekit.git
    ```
    
    The default branch is `luakit`, which is what you need for a module in pure
