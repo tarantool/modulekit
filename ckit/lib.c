@@ -25,7 +25,7 @@ luaopen_ckit_lib(lua_State *L)
 {
 	/* result returned from require('ckit.lib') */
 	lua_newtable(L);
-	static const struct luaL_reg meta [] = {
+	static const struct luaL_Reg meta [] = {
 		{"func", ckit_func},
 		{NULL, NULL}
 	};
