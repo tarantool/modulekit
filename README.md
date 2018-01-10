@@ -138,7 +138,7 @@ Enjoy! Thank you for contributing to Tarantool.
 [TarantoolLuaReference]: http://tarantool.org/doc/reference/index.html
 [TarantoolCReference]: http://tarantool.org/doc/reference/capi.html
 [TarantoolRocks]: http://github.com/tarantool/rocks
-[TarantoolRocksList]: http://tarantool.org/rocks.html
+[TarantoolRocksList]: http://tarantool.org/en/download/rocks.html
 [TarantoolDocker]: http://github.com/tarantool/docker
 [Luakit]: http://github.com/tarantool/modulekit/tree/luakit
 [Ckit]: http://github.com/tarantool/modulekit/tree/ckit
