@@ -13,12 +13,12 @@ set(TARANTOOL_FIND_REQUIRED ON)
 find_package(Tarantool)
 include_directories(${TARANTOOL_INCLUDE_DIRS})
 
-# Find MsgPuck llibrary
+# Find MsgPuck library
 set(MsgPuck_FIND_REQUIRED ON)
 find_package(MsgPuck)
 include_directories(${MSGPUCK_INCLUDE_DIRS})
 
-# Find other dependecies
+# Find other dependencies
 
 # Set CFLAGS
 # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
