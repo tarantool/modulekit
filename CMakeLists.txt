@@ -9,7 +9,7 @@ endif()
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}" ${CMAKE_MODULE_PATH})
 
 # Find Tarantool and Lua dependecies
-set(TARANTOOL_FIND_REQUIRED ON)
+set(Tarantool_FIND_REQUIRED ON)
 find_package(Tarantool)
 include_directories(${TARANTOOL_INCLUDE_DIRS})
 
