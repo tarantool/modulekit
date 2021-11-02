@@ -8,7 +8,7 @@ version = 'scm-1'
 
 -- url and branch of the package's repository at GitHub
 source  = {
-    url    = 'git://github.com/tarantool/modulekit.git';
+    url    = 'git+https://github.com/tarantool/modulekit.git';
     branch = 'ckit';
 }
 
